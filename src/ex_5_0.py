@@ -1,17 +1,19 @@
-"""ex_5_0.py"""
+"""ex_5_1.py"""
+try:
+    from src.ex_5_0 import line_count
+except ImportError:
+    from ex_5_0 import line_count
 
 
-def line_count(infile):
-    pass
+def main(infile):
+    """Call line_count with the infile argument."""
+    line_count(infile)
 
 
 if __name__ == "__main__":
-    # get the utility function for path discovery
-    try:
-        from src.util import get_repository_root
-    except ImportError:
-        from util import get_repository_root
-
-    # Test line_count with a file from the data directory
-    data_directory = get_repository_root() / "data"
-    line_count(data_directory / "ex_5_2-data.csv")
+    import argparse
+    parser = argparse.ArgumentParser(description="This program prints the number of lines in infile.")
+    parser.add_argument('infile',help='provide file path',nargs='?')
+    args = parser.parse_args()
+    if args.infile:
+        main(args.infile)
