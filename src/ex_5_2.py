@@ -1,10 +1,10 @@
-""" ex_5_2.py
+"""ex_5_2.py
 This module contains an entry point that
 
-- loads data from a file `ex_5_2-data.csv` into a numpy array
+- loads data from a file ex_5_2-data.csv into a numpy array
 - shifts and scales the data such that the resulting mean
         is 0 and the standard deviation is 1.
-- writes the processed data to a file called `ex_5_2-processed.csv`
+- writes the processed data to a file called ex_5_2-processed.csv
 """
 import numpy as np
 
@@ -15,12 +15,10 @@ except ImportError:
 
 
 if __name__ == "__main__":
-
-    # Use these predefined input / output files
     root_dir = get_repository_root()
     INFILE = root_dir / "data" / "ex_5_2-data.csv"
     OUTFILE = root_dir / "outputs" / "ex_5_2-processed.csv"
-
-    # Complete the data processing steps using numpy here.
-
-    # Save the output to OUTFILE using numpy routines.
+    data = np.loadtxt(INFILE, delimiter=',')
+    data_mean_zero = data - np.mean(data)
+    processed = data_mean_zero / np.std(data_mean_zero)
+    np.savetxt(OUTFILE, processed, delimiter=',')
